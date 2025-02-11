@@ -1,9 +1,26 @@
+// ignore_for_file: prefer_single_quotes
 class Assets {
   Assets._();
   
   /// Assets for imagesAppIcon
   /// assets/images/app_icon.png
   static const String imagesAppIcon = "assets/images/app_icon.png";
+
+  /// Assets for imagesOnBoardingBackground1
+  /// assets/images/on_boarding_background_1.svg
+  static const String imagesOnBoardingBackground1 = "assets/images/on_boarding_background_1.svg";
+
+  /// Assets for imagesOnBoardingBackground2
+  /// assets/images/on_boarding_background_2.svg
+  static const String imagesOnBoardingBackground2 = "assets/images/on_boarding_background_2.svg";
+
+  /// Assets for imagesOnBoardingImage1
+  /// assets/images/on_boarding_image_1.svg
+  static const String imagesOnBoardingImage1 = "assets/images/on_boarding_image_1.svg";
+
+  /// Assets for imagesOnBoardingImage2
+  /// assets/images/on_boarding_image_2.svg
+  static const String imagesOnBoardingImage2 = "assets/images/on_boarding_image_2.svg";
 
   /// Assets for imagesPlant
   /// assets/images/plant.svg

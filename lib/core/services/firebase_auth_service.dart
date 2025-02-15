@@ -29,4 +29,24 @@ class FirebaseAuthService {
           message: 'An unknown error occurred, try again later.');
     }
   }
+
+  Future<User> loginUsingEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      return userCredential.user!;
+    } on FirebaseAuthException catch (e) {
+      log('FirebaseAuthService.loginUsingEmailAndPassword: ${e.toString()}');
+      if (e.code == 'user-not-found') {
+        throw CustomException(message: 'Wrong Email Or Password.');
+      } else if (e.code == 'wrong-password') {
+        throw CustomException(message: 'Wrong Email Or Password.');
+      } else {
+        log('FirebaseAuthService.loginUsingEmailAndPassword: ${e.toString()}');
+        throw CustomException(
+            message: 'An unknown error occurred, try again later.');
+      }
+    }
+  }
 }

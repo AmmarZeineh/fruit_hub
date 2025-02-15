@@ -26,4 +26,18 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> logInUsingEmailOrPassword(
+      {required String email, required String password}) async {
+    try {
+      var user = await firebaseAuthService.loginUsingEmailAndPassword(
+          email: email, password: password);
+      return Right(UserModel.fromFireBaseAuth(user));
+    } on Exception catch (e) {
+      log('AuthRepoImpl.loginUsingEmailAndPassword: ${e.toString()}');
+
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

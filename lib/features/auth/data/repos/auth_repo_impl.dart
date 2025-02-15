@@ -40,4 +40,15 @@ class AuthRepoImpl implements AuthRepo {
       return Left(ServerFailure(message: e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> logInWithGoogle() async {
+    try {
+      var user = await firebaseAuthService.signInWithGoogle();
+      return Right(UserModel.fromFireBaseAuth(user));
+    } catch (e) {
+      log('AuthRepoImpl.logInWithGoogle: ${e.toString()}');
+      return Left(ServerFailure(message: e.toString()));
+    }
+  }
 }

@@ -29,4 +29,14 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginSuccess(user: user));
     });
   }
+
+  Future<void> loginWithFacebook() async {
+    emit(LoginLoading());
+    final result = await authRepo.logInWithFacebook();
+    result.fold((failure) {
+      emit(LoginFailure(message: failure.message));
+    }, (user) {
+      emit(LoginSuccess(user: user));
+    });
+  }
 }

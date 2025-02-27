@@ -13,11 +13,12 @@ import 'package:fruits_hub/generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupLocator();
-  Bloc.observer = CustomBlocObserver();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  setupLocator();
+  Bloc.observer = CustomBlocObserver();
+  
   await Prefs.init();
   runApp(const FruitHub());
 }

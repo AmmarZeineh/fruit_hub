@@ -19,7 +19,7 @@ class FeaturedButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 4),
         child: Text(
           'تسوق الان',
-          style: TextStyles.bold13.copyWith(color: AppColors.primary),
+          style: TextStyles.bold13.copyWith(color: AppColors.primaryColor),
         ),
       ),
     );

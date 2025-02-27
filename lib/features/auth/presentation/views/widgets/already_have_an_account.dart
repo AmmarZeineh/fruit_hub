@@ -26,7 +26,7 @@ class AlreadyHaveAnAccount extends StatelessWidget {
               },
             text: ' تسجيل دخول',
             style: TextStyles.semiBold16.copyWith(
-              color: AppColors.primary,
+              color: AppColors.primaryColor,
             ),
           ),
         ],

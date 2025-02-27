@@ -27,7 +27,7 @@ class DontHaveAnAccountWidget extends StatelessWidget {
               },
             text: ' قم بإنشاء حساب',
             style: TextStyles.semiBold16.copyWith(
-              color: AppColors.primary,
+              color: AppColors.primaryColor,
             ),
           ),
         ],

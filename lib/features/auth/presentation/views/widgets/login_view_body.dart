@@ -61,7 +61,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   Text(
                     'هل نسيت كلمة المرور؟',
                     style: TextStyles.semiBold13
-                        .copyWith(color: AppColors.primaryLight),
+                        .copyWith(color: AppColors.lightPrimaryColor),
                   ),
                 ],
               ),

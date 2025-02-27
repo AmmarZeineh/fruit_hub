@@ -18,7 +18,7 @@ void main() async {
   );
   setupLocator();
   Bloc.observer = CustomBlocObserver();
-  
+
   await Prefs.init();
   runApp(const FruitHub());
 }
@@ -32,7 +32,7 @@ class FruitHub extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Cairo',
         colorScheme: ColorScheme.fromSeed(
-          seedColor: AppColors.primary,
+          seedColor: AppColors.primaryColor,
         ),
         scaffoldBackgroundColor: Colors.white,
       ),

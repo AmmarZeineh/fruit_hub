@@ -43,7 +43,7 @@ class _AcceptTermsAndConditionsState extends State<AcceptTermsAndConditions> {
                 TextSpan(
                   text: 'الشروط والأحكام الخاصة بنا',
                   style: TextStyles.semiBold13.copyWith(
-                    color: AppColors.primaryLight,
+                    color: AppColors.lightPrimaryColor,
                   ),
                 ),
               ],

@@ -26,11 +26,11 @@ class OnBoardingPageView extends StatelessWidget {
               ),
               Text(
                 ' HUB',
-                style: TextStyles.bold23.copyWith(color: AppColors.secondry),
+                style: TextStyles.bold23.copyWith(color: AppColors.secondaryColor),
               ),
               Text(
                 'Fruit',
-                style: TextStyles.bold23.copyWith(color: AppColors.primary),
+                style: TextStyles.bold23.copyWith(color: AppColors.primaryColor),
               ),
             ],
           ),

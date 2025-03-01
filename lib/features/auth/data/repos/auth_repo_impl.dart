@@ -1,12 +1,15 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:either_dart/either.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fruits_hub/constants.dart';
 import 'package:fruits_hub/core/errors/exceptions.dart';
 import 'package:fruits_hub/core/errors/failure.dart';
 import 'package:fruits_hub/core/services/backend_endpoints.dart';
 import 'package:fruits_hub/core/services/database_service.dart';
 import 'package:fruits_hub/core/services/firebase_auth_service.dart';
+import 'package:fruits_hub/core/services/shared_preference_singletone.dart';
 import 'package:fruits_hub/features/auth/data/models/user_model.dart';
 import 'package:fruits_hub/features/auth/domain/entities/user_entity.dart';
 import 'package:fruits_hub/features/auth/domain/repos/auth_repo.dart';
@@ -54,6 +57,7 @@ class AuthRepoImpl implements AuthRepo {
       var user = await firebaseAuthService.loginUsingEmailAndPassword(
           email: email, password: password);
       var userEntity = await fetchUserData(uId: user.uid);
+      await saveUserData(user: userEntity);
       return Right(userEntity);
     } on Exception catch (e) {
       log('AuthRepoImpl.loginUsingEmailAndPassword: ${e.toString()}');
@@ -69,6 +73,7 @@ class AuthRepoImpl implements AuthRepo {
       user = await firebaseAuthService.signInWithGoogle();
       var userEntity = UserModel.fromFireBaseAuth(user);
       await addUserToDataBase(user: userEntity);
+      await saveUserData(user: userEntity);
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -85,6 +90,7 @@ class AuthRepoImpl implements AuthRepo {
       user = await firebaseAuthService.signInWithFacebook();
       var userEntity = UserModel.fromFireBaseAuth(user);
       await addUserToDataBase(user: userEntity);
+      await saveUserData(user: userEntity);
       return Right(userEntity);
     } catch (e) {
       await deleteUser(user);
@@ -97,7 +103,9 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future addUserToDataBase({required UserEntity user}) async {
     await dataBaseService.addData(
-        path: BackendEndpoints.addUser, data: user.toMap(), docId: user.uId);
+        path: BackendEndpoints.addUser,
+        data: UserModel.fromUserEntity(user).toMap(),
+        docId: user.uId);
   }
 
   @override
@@ -105,5 +113,11 @@ class AuthRepoImpl implements AuthRepo {
     var data = await dataBaseService.getData(
         path: BackendEndpoints.addUser, docId: uId);
     return UserModel.fromJson(data);
+  }
+
+  @override
+  Future saveUserData({required UserEntity user}) async {
+    var jsonData = jsonEncode(UserModel.fromUserEntity(user).toMap());
+    await Prefs.setString(kUserData, jsonData);
   }
 }

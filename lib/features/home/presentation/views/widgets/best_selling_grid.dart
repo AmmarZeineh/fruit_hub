@@ -16,6 +16,7 @@ class BestSellingGrid extends StatelessWidget {
       itemBuilder: (BuildContext context, int index) {
         return const FruitItem();
       },
+      itemCount: 10,
     );
   }
 }

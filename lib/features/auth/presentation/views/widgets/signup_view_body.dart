@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/helper_functions/error_snack_bar.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/core/widgets/custom_form_text_field.dart';
-import 'package:fruits_hub/core/widgets/passwoed_field.dart';
+import 'package:fruits_hub/core/widgets/password_field.dart';
 import 'package:fruits_hub/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:fruits_hub/features/auth/presentation/views/widgets/accept_terms_and_conditions.dart';
 import 'package:fruits_hub/features/auth/presentation/views/widgets/already_have_an_account.dart';

@@ -38,6 +38,30 @@ class Assets {
   /// assets/images/google_icon.svg
   static const String imagesGoogleIcon = "assets/images/google_icon.svg";
 
+  /// Assets for imagesHomeActiveIcon
+  /// assets/images/home_active_icon.svg
+  static const String imagesHomeActiveIcon = "assets/images/home_active_icon.svg";
+
+  /// Assets for imagesHomeInActiveIcon
+  /// assets/images/home_in_active_icon.svg
+  static const String imagesHomeInActiveIcon = "assets/images/home_in_active_icon.svg";
+
+  /// Assets for imagesMyAccountActiveIcon
+  /// assets/images/my_account_active_icon.svg
+  static const String imagesMyAccountActiveIcon = "assets/images/my_account_active_icon.svg";
+
+  /// Assets for imagesMyAccountInActiveIcon
+  /// assets/images/my_account_in_active_icon.svg
+  static const String imagesMyAccountInActiveIcon = "assets/images/my_account_in_active_icon.svg";
+
+  /// Assets for imagesMyProductsActiveIcon
+  /// assets/images/my_products_active_icon.svg
+  static const String imagesMyProductsActiveIcon = "assets/images/my_products_active_icon.svg";
+
+  /// Assets for imagesMyProductsInActiveIcon
+  /// assets/images/my_products_in_active_icon.svg
+  static const String imagesMyProductsInActiveIcon = "assets/images/my_products_in_active_icon.svg";
+
   /// Assets for imagesNotification
   /// assets/images/notification.svg
   static const String imagesNotification = "assets/images/notification.svg";
@@ -69,6 +93,14 @@ class Assets {
   /// Assets for imagesSearchIcon
   /// assets/images/search-icon.svg
   static const String imagesSearchIcon = "assets/images/search-icon.svg";
+
+  /// Assets for imagesShoppingCartActiveIcon
+  /// assets/images/shopping_cart_active_icon.svg
+  static const String imagesShoppingCartActiveIcon = "assets/images/shopping_cart_active_icon.svg";
+
+  /// Assets for imagesShoppingCartInActiveIcon
+  /// assets/images/shopping_cart_in_active_icon.svg
+  static const String imagesShoppingCartInActiveIcon = "assets/images/shopping_cart_in_active_icon.svg";
 
   /// Assets for imagesSplashBottom
   /// assets/images/splash_bottom.svg

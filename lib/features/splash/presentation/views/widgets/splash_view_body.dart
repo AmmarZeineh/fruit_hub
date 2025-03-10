@@ -5,7 +5,7 @@ import 'package:fruits_hub/core/services/firebase_auth_service.dart';
 import 'package:fruits_hub/core/services/shared_preference_singletone.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
 import 'package:fruits_hub/features/auth/presentation/views/login_view.dart';
-import 'package:fruits_hub/features/home/presentation/views/home_view.dart';
+import 'package:fruits_hub/features/home/presentation/views/main_view.dart';
 import 'package:fruits_hub/features/on_boarding/presentation/views/on_boarding_view.dart';
 
 class SplashViewBody extends StatefulWidget {
@@ -51,7 +51,7 @@ void excuteNavigation(BuildContext context) {
     if (context.mounted) {
       if (isOnBoardingViewSeen) {
         if (isUserLoggredIn) {
-          Navigator.pushNamed(context, HomeView.routeName);
+          Navigator.pushNamed(context, MainView.routeName);
         } else {
           Navigator.pushReplacementNamed(context, LoginView.routeName);
         }

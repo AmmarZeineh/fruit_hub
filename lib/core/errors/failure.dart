@@ -1,9 +1,9 @@
 abstract class Failure {
   final String message;
 
-  Failure({required this.message});
+  Failure(this.message);
 }
 
 class ServerFailure extends Failure {
-  ServerFailure({required super.message});
+  ServerFailure(super.message);
 }

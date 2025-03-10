@@ -4,7 +4,7 @@ import 'package:fruits_hub/core/helper_functions/error_snack_bar.dart';
 import 'package:fruits_hub/core/widgets/custom_progress_hud.dart';
 import 'package:fruits_hub/features/auth/presentation/cubits/login_cubit/login_cubit.dart';
 import 'package:fruits_hub/features/auth/presentation/views/widgets/login_view_body.dart';
-import 'package:fruits_hub/features/home/presentation/views/home_view.dart';
+import 'package:fruits_hub/features/home/presentation/views/main_view.dart';
 
 class LoginViewBodyBlocConsumer extends StatelessWidget {
   const LoginViewBodyBlocConsumer({
@@ -18,7 +18,7 @@ class LoginViewBodyBlocConsumer extends StatelessWidget {
         if (state is LoginFailure) {
           errorSnackBar(context, state.message);
         } else if (state is LoginSuccess) {
-          Navigator.pushNamed(context, HomeView.routeName);
+          Navigator.pushNamed(context, MainView.routeName);
         }
       },
       builder: (context, state) {

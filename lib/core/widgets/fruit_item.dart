@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
+import 'package:fruits_hub/core/helper_functions/error_snack_bar.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_font_styles.dart';
 import 'package:fruits_hub/core/widgets/custom_network_image.dart';
+import 'package:fruits_hub/features/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 
 class FruitItem extends StatelessWidget {
   const FruitItem({super.key, required this.product});
@@ -20,10 +23,11 @@ class FruitItem extends StatelessWidget {
             top: 0,
             right: 0,
             child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite_outline,
-                )),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.favorite_outline,
+              ),
+            ),
           ),
           Positioned.fill(
             child: Column(
@@ -80,11 +84,17 @@ class FruitItem extends StatelessWidget {
                     ),
                     textAlign: TextAlign.right,
                   ),
-                  trailing: const CircleAvatar(
-                    backgroundColor: AppColors.primaryColor,
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
+                  trailing: GestureDetector(
+                    onTap: () {
+                      context.read<CartCubit>().addItem(product);
+                      errorSnackBar(context, 'تمت اضافة المنتج للسلة');
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: AppColors.primaryColor,
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

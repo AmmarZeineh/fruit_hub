@@ -14,12 +14,9 @@ class ProductRepoImpl implements ProductRepo {
   Future<Either<Failure, List<ProductEntity>>> getBestSellingProducts() async {
     try {
       var data = await dataBaseService.getData(
-          path: BackendEndpoints.getProducts,
-          query: {
-            'orderBy': 'sellingCount',
-            'limit': 10,
-            'descending': true
-          }) as List<Map<String, dynamic>>;
+        path: BackendEndpoints.getProducts,
+        query: {'orderBy': 'sellingCount', 'limit': 10, 'descending': true},
+      ) as List<Map<String, dynamic>>;
 
       List<ProductEntity> products =
           data.map((e) => ProductModel.fromJson(e).toEntity()).toList();

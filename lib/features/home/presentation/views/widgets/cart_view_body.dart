@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/widgets/build_app_bar.dart';
-import 'package:fruits_hub/core/widgets/custom_button.dart';
+import 'package:fruits_hub/features/home/presentation/cubits/cart_cubit/cart_cubit.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/cart_header.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/cart_items_list.dart';
 import 'package:fruits_hub/features/home/presentation/views/widgets/custom_divider.dart';
+import 'package:fruits_hub/features/home/presentation/views/widgets/custom_total_price_button.dart';
 
 class CartViewBody extends StatelessWidget {
   const CartViewBody({super.key});
@@ -23,24 +25,33 @@ class CartViewBody extends StatelessWidget {
                   buildAppBar(
                     context,
                     title: 'السلة',
-                    backButton: true,
                   ),
                   const SizedBox(
                     height: 16,
                   ),
-                  const CartHeader(),
+                  CartHeader(
+                    count: context.watch<CartCubit>().cartEntity.items.length,
+                  ),
                   const SizedBox(
                     height: 24,
                   ),
                 ],
               ),
             ),
-            const SliverToBoxAdapter(
-              child: CustomDivider(),
+            SliverToBoxAdapter(
+              child: Visibility(
+                  visible:
+                      context.read<CartCubit>().cartEntity.items.isNotEmpty,
+                  child: const CustomDivider()),
             ),
-            const CartItemsList(),
-            const SliverToBoxAdapter(
-              child: CustomDivider(),
+            CartItemsList(
+              items: context.watch<CartCubit>().cartEntity.items,
+            ),
+            SliverToBoxAdapter(
+              child: Visibility(
+                  visible:
+                      context.read<CartCubit>().cartEntity.items.isNotEmpty,
+                  child: const CustomDivider()),
             ),
           ],
         ),
@@ -48,7 +59,7 @@ class CartViewBody extends StatelessWidget {
           left: 16,
           right: 16,
           bottom: MediaQuery.sizeOf(context).height * .08,
-          child: CustomButton(text: 'الدفع  120جنيه', onPressed: () {}),
+          child: const CustomTotalPriceButton(),
         ),
       ],
     );

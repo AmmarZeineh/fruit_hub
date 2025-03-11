@@ -1,38 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruits_hub/core/utils/app_colors.dart';
 import 'package:fruits_hub/core/utils/app_font_styles.dart';
-import 'package:fruits_hub/features/home/presentation/views/widgets/cart_item_action_button.dart';
+import 'package:fruits_hub/features/home/domain/entities/cart_item_entity.dart';
+import 'package:fruits_hub/features/home/presentation/cubits/cart_item_cubit/cart_item_cubit.dart';
 
-class CartItemActionButtonsWidget extends StatelessWidget {
-  const CartItemActionButtonsWidget({super.key});
+class CartItemActionButtons extends StatelessWidget {
+  const CartItemActionButtons({super.key, required this.cartItemEntity});
 
+  final CartItemEntity cartItemEntity;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const CartItemActionButton(
-          color: AppColors.primaryColor,
+        CartItemActionButton(
           iconColor: Colors.white,
-          iconData: Icons.add,
+          icon: Icons.add,
+          color: AppColors.primaryColor,
+          onTap: () {
+            cartItemEntity.increaseQuantity();
+            context.read<CartItemCubit>().updateCartItem(cartItemEntity);
+          },
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            '3',
+            cartItemEntity.quantity.toString(),
+            textAlign: TextAlign.center,
             style: TextStyles.bold16,
           ),
         ),
-        const CartItemActionButton(
-          color: Color(0xfff3f5f7),
+        CartItemActionButton(
           iconColor: Colors.grey,
-          iconData: Icons.remove,
-        ),
-        const Spacer(),
-        Text(
-          '60 جنيه ',
-          style: TextStyles.bold16.copyWith(color: AppColors.secondaryColor),
+          icon: Icons.remove,
+          color: const Color(0xFFF3F5F7),
+          onTap: () {
+            if (cartItemEntity.quantity > 1) {
+              cartItemEntity.decreaseQuantity();
+            }
+            context.read<CartItemCubit>().updateCartItem(cartItemEntity);
+          },
         )
       ],
+    );
+  }
+}
+
+class CartItemActionButton extends StatelessWidget {
+  const CartItemActionButton(
+      {super.key,
+      required this.icon,
+      required this.color,
+      required this.onTap,
+      required this.iconColor});
+
+  final IconData icon;
+  final Color iconColor;
+  final Color color;
+  final VoidCallback onTap;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 24,
+        height: 24,
+        padding: const EdgeInsets.all(
+          2,
+        ),
+        decoration: ShapeDecoration(
+          color: color,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(100),
+          ),
+        ),
+        child: FittedBox(
+          child: Icon(
+            icon,
+            color: iconColor,
+          ),
+        ),
+      ),
     );
   }
 }

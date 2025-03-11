@@ -7,7 +7,7 @@ class ProductEntity extends Equatable {
   final String description;
   final num price;
   final bool isFeatured;
-  String? imageUrl;
+  final String? imageUrl;
   final int expirationsMonths;
   final bool isOrganic;
   final int numberOfCalories;
@@ -15,7 +15,7 @@ class ProductEntity extends Equatable {
   final num ratingCount = 0;
   final int unitAmount;
   final List<ReviewEntity> reviews;
-  ProductEntity({
+  const ProductEntity({
     required this.avgRating,
     required this.name,
     required this.code,
@@ -31,6 +31,5 @@ class ProductEntity extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [code];
 }

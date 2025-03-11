@@ -26,7 +26,6 @@ class ReviewModel {
   }
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) {
-    print(json);
     return ReviewModel(
       name: json['name'],
       image: json['image'],

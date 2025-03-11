@@ -6,6 +6,14 @@ class InActiveBottomNavigationBarItem extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return SvgPicture.asset(image);
+    return Container(
+      height: double.infinity,
+      color: Colors.transparent,
+      width: MediaQuery.sizeOf(context).width / 4.5,
+      child: Padding(
+        padding: const EdgeInsets.all(26),
+        child: SvgPicture.asset(image),
+      ),
+    );
   }
 }

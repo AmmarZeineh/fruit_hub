@@ -6,7 +6,7 @@ class CartEntity {
 
   CartEntity({required this.items});
 
-  num get totalCost {
+  num calculateTotalPrice() {
     num total = 0;
     for (var item in items) {
       total += item.totalItemPrice();

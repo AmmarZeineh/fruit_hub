@@ -4,12 +4,12 @@ import 'package:fruits_hub/core/utils/app_font_styles.dart';
 class CustomFormTextField extends StatelessWidget {
   const CustomFormTextField(
       {super.key,
-      required this.hint,
+      required this.hintText,
       required this.textInputType,
       this.suffixIcon,
       this.onSaved,
       this.obscureText = false});
-  final String hint;
+  final String hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
   final void Function(String?)? onSaved;
@@ -27,7 +27,7 @@ class CustomFormTextField extends StatelessWidget {
       },
       keyboardType: textInputType,
       decoration: InputDecoration(
-        hintText: hint,
+        hintText: hintText,
         suffixIcon: suffixIcon,
         hintStyle: TextStyles.bold13.copyWith(color: const Color(0xff949d9e)),
         border: buildBorder(),

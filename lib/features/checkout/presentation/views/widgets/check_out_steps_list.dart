@@ -2,20 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/step_item.dart';
 
 class CheckoutStepsList extends StatelessWidget {
-  const CheckoutStepsList({super.key});
+  const CheckoutStepsList(
+      {super.key, required this.currentIndex, required this.pageController});
+
+  final int currentIndex;
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: List.generate(
         generateSteps().length,
         (index) {
           return Expanded(
-            child: StepItem(
-              isSelected: false,
-              title: generateSteps()[index],
-              index: (index + 1).toString(),
+            child: GestureDetector(
+              onTap: () {
+                pageController.animateToPage(index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn);
+              },
+              child: StepItem(
+                isSelected: index <= currentIndex,
+                title: generateSteps()[index],
+                index: (index + 1).toString(),
+              ),
             ),
           );
         },
@@ -29,6 +39,5 @@ List<String> generateSteps() {
     'الشحن',
     'العنوان',
     'الدفع',
-    'المراجعه',
   ];
 }

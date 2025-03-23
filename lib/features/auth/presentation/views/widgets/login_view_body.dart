@@ -41,7 +41,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 onSaved: (value) {
                   email = value!;
                 },
-                hint: 'البريد الالكتروني',
+                hintText: 'البريد الالكتروني',
                 textInputType: TextInputType.emailAddress,
               ),
               const SizedBox(

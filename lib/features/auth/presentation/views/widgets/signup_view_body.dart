@@ -38,7 +38,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 onSaved: (value) {
                   name = value!;
                 },
-                hint: 'الاسم كامل',
+                hintText: 'الاسم كامل',
                 textInputType: TextInputType.name,
               ),
               const SizedBox(
@@ -48,7 +48,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 onSaved: (value) {
                   email = value!;
                 },
-                hint: 'البريد الالكتروني',
+                hintText: 'البريد الالكتروني',
                 textInputType: TextInputType.emailAddress,
               ),
               const SizedBox(

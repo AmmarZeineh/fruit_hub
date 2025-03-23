@@ -11,7 +11,7 @@ List<ProductEntity> getDummyProducts() {
       expirationsMonths: 6,
       numberOfCalories: 100,
       unitAmount: 100,
-      reviews: [],
+      reviews: const [],
       price: 10.0,
       isOrganic: true,
       isFeatured: true,

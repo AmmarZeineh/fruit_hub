@@ -6,7 +6,6 @@ import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout
 
 class CheckoutViewBody extends StatefulWidget {
   const CheckoutViewBody({super.key});
-
   @override
   State<CheckoutViewBody> createState() => _CheckoutViewBodyState();
 }
@@ -16,6 +15,11 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
   @override
   void initState() {
     pageController = PageController();
+    pageController.addListener(() {
+      setState(() {
+        currentIndex = pageController.page!.toInt();
+      });
+    });
     super.initState();
   }
 
@@ -25,6 +29,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
     super.dispose();
   }
 
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,6 +37,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         horizontal: 16,
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(
             height: 20,
@@ -44,7 +50,10 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
           const SizedBox(
             height: 16,
           ),
-          const CheckoutStepsList(),
+          CheckoutStepsList(
+            pageController: pageController,
+            currentIndex: currentIndex,
+          ),
           const SizedBox(
             height: 32,
           ),
@@ -52,8 +61,12 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             child: CheckoutPageView(pageController: pageController),
           ),
           CustomButton(
-            text: 'التالي',
-            onPressed: () {},
+            text: getNextText(currentIndex),
+            onPressed: () {
+              pageController.animateToPage(currentIndex + 1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.bounceIn);
+            },
           ),
           const SizedBox(
             height: 32,
@@ -61,5 +74,18 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
       ),
     );
+  }
+}
+
+String getNextText(int currentIndex) {
+  switch (currentIndex) {
+    case 0:
+      return 'التالي';
+    case 1:
+      return 'التالي';
+    case 2:
+      return 'ادفع عبر PayPal';
+    default:
+      return 'التالي';
   }
 }

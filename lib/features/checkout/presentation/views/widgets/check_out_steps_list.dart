@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fruits_hub/core/helper_functions/error_snack_bar.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/step_item.dart';
 
 class CheckoutStepsList extends StatelessWidget {
@@ -17,9 +20,13 @@ class CheckoutStepsList extends StatelessWidget {
           return Expanded(
             child: GestureDetector(
               onTap: () {
-                pageController.animateToPage(index,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeIn);
+                if (context.read<OrderInputEntity>().payWithCash != null) {
+                  pageController.animateToPage(index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn);
+                } else {
+                  errorSnackBar(context, 'الرجاء اختيار طريقة دفع');
+                }
               },
               child: StepItem(
                 isSelected: index <= currentIndex,

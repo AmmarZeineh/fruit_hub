@@ -10,10 +10,12 @@ class ShippingSection extends StatefulWidget {
   State<ShippingSection> createState() => _ShippingSectionState();
 }
 
-class _ShippingSectionState extends State<ShippingSection> {
+class _ShippingSectionState extends State<ShippingSection>
+    with AutomaticKeepAliveClientMixin {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Column(
       children: [
         const SizedBox(
@@ -21,6 +23,7 @@ class _ShippingSectionState extends State<ShippingSection> {
         ),
         ShippingItem(
           onTap: () {
+            context.read<OrderInputEntity>().payWithCash = true;
             selectedIndex = 0;
             setState(() {});
           },
@@ -39,6 +42,7 @@ class _ShippingSectionState extends State<ShippingSection> {
         ),
         ShippingItem(
             onTap: () {
+              context.read<OrderInputEntity>().payWithCash = false;
               selectedIndex = 1;
               setState(() {});
             },
@@ -53,4 +57,8 @@ class _ShippingSectionState extends State<ShippingSection> {
       ],
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }

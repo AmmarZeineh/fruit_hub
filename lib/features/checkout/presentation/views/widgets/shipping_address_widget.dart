@@ -1,15 +1,18 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fruits_hub/core/utils/app_font_styles.dart';
 import 'package:fruits_hub/core/utils/app_images.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/payment_item.dart';
-
 
 class ShippingAddressWidget extends StatelessWidget {
   const ShippingAddressWidget({
     super.key,
+    required this.pageController,
   });
+
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,7 @@ class ShippingAddressWidget extends StatelessWidget {
             width: 8,
           ),
           Text(
-            ' سوريا',
+            context.read<OrderInputEntity>().shippingAddressEntity.toString(),
             textAlign: TextAlign.right,
             style: TextStyles.regular13.copyWith(
               color: const Color(0xFF4E5556),
@@ -33,7 +36,9 @@ class ShippingAddressWidget extends StatelessWidget {
           const Spacer(),
           GestureDetector(
             onTap: () {
-             
+              pageController.animateToPage(1,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeIn);
             },
             child: SizedBox(
               child: Row(

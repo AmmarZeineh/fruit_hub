@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fruits_hub/core/utils/app_font_styles.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
+import 'package:provider/provider.dart';
 
 import 'payment_item.dart';
 
@@ -23,8 +25,8 @@ class OrderSummryWidget extends StatelessWidget {
                 ),
               ),
               const Spacer(),
-              const Text(
-                '150 جنيه',
+              Text(
+                '${context.read<OrderInputEntity>().cartEntity.calculateTotalPrice()} جنيه',
                 textAlign: TextAlign.right,
                 style: TextStyles.semiBold16,
               )
@@ -43,7 +45,7 @@ class OrderSummryWidget extends StatelessWidget {
               ),
               const Spacer(),
               Text(
-                '30جنية',
+                '30 جنيه',
                 textAlign: TextAlign.right,
                 style: TextStyles.regular13.copyWith(
                   color: const Color(0xFF4E5556),
@@ -61,15 +63,15 @@ class OrderSummryWidget extends StatelessWidget {
           const SizedBox(
             height: 9,
           ),
-          const Row(
+          Row(
             children: [
-              Text(
+              const Text(
                 'الكلي',
                 style: TextStyles.bold16,
               ),
-              Spacer(),
+              const Spacer(),
               Text(
-                '180 جنيه',
+                '${context.read<OrderInputEntity>().cartEntity.calculateTotalPrice() + 30} جنيه',
                 style: TextStyles.bold16,
               )
             ],

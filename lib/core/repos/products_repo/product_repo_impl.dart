@@ -2,7 +2,7 @@ import 'package:either_dart/either.dart';
 import 'package:fruits_hub/core/entities/product_entity.dart';
 import 'package:fruits_hub/core/errors/failure.dart';
 import 'package:fruits_hub/core/models/product_model.dart';
-import 'package:fruits_hub/core/repos/product_repo.dart';
+import 'package:fruits_hub/core/repos/products_repo/product_repo.dart';
 import 'package:fruits_hub/core/services/backend_endpoints.dart';
 import 'package:fruits_hub/core/services/database_service.dart';
 

@@ -1,4 +1,5 @@
 import 'package:either_dart/either.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fruits_hub/core/errors/failure.dart';
 import 'package:fruits_hub/core/repos/orders_repo/order_repo.dart';
 import 'package:fruits_hub/core/services/backend_endpoints.dart';
@@ -19,7 +20,9 @@ class OrderRepoImpl implements OrderRepo {
           data: OrderModel.fromEntity(orderInputEntity).toJson());
 
       return const Right(null);
-    } catch (e) {
+    } on FirebaseException catch (e) {
+      return Left(ServerFailure(e.message ?? 'Failed to create order'));
+    } on Exception catch (e) {
       return Left(ServerFailure('Failed to create order'));
     }
   }

@@ -4,6 +4,7 @@ import 'package:fruits_hub/core/helper_functions/error_snack_bar.dart';
 import 'package:fruits_hub/core/widgets/build_app_bar.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_hub/features/checkout/presentation/manger/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/check_out_steps_list.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_page_view.dart';
 
@@ -76,9 +77,12 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             onPressed: () {
               if (currentIndex == 0) {
                 _handleShippingSection(context);
-              }
-              if (currentIndex == 1) {
+              } else if (currentIndex == 1) {
                 _handleAddressSection();
+              } else {
+                context
+                    .read<AddOrderCubit>()
+                    .addOrder(context.read<OrderInputEntity>());
               }
             },
           ),

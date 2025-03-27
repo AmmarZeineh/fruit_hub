@@ -159,7 +159,6 @@ class AuthRepoImpl extends AuthRepo {
       data: UserModel.fromUserEntity(user).toMap(),
       docId: user.uId,
     );
-    
   }
 
   @override

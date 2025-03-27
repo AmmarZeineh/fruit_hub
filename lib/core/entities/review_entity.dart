@@ -1,4 +1,3 @@
-
 class ReviewEntity {
   final String name;
   final String image;
@@ -12,6 +11,4 @@ class ReviewEntity {
       required this.rating,
       required this.date,
       required this.reviewDescription});
-
-      
 }

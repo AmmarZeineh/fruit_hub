@@ -12,4 +12,27 @@ class OrderInputEntity {
     required this.uID,
     this.shippingAddressEntity,
   });
+
+  calculateShippingPrice() {
+    if (payWithCash!) {
+      return 30;
+    } else {
+      return 0;
+    }
+  }
+
+  calculateShippingDiscount() {
+    return 0;
+  }
+
+  calculateTotalPriceAfterShippingAndDiscount() {
+    return cartEntity.calculateTotalPrice() +
+        calculateShippingPrice() -
+        calculateShippingDiscount();
+  }
+
+  @override
+  toString() {
+    return 'OrderInputEntity(uID: $uID, cartEntity: $cartEntity, payWithCash: $payWithCash, shippingAddressEntity: $shippingAddressEntity)';
+  }
 }

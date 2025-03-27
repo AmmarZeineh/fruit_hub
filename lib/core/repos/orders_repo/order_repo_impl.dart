@@ -22,6 +22,7 @@ class OrderRepoImpl implements OrderRepo {
       return const Right(null);
     } on FirebaseException catch (e) {
       return Left(ServerFailure(e.message ?? 'Failed to create order'));
+      // ignore: unused_catch_clause
     } on Exception catch (e) {
       return Left(ServerFailure('Failed to create order'));
     }

@@ -22,8 +22,7 @@ class OrderModel {
       uID: orderInputEntity.uID,
       shippingAddressModel: ShippingAddressModel.fromEntity(
           orderInputEntity.shippingAddressEntity!),
-      paymentMethod:
-          orderInputEntity.payWithCash == true ? 'Cash' : 'PayPal',
+      paymentMethod: orderInputEntity.payWithCash == true ? 'Cash' : 'PayPal',
       products: orderInputEntity.cartEntity.items
           .map((cartItem) => ProductOrderModel.fromEntity(cartItem))
           .toList(),
@@ -33,6 +32,7 @@ class OrderModel {
   toJson() {
     return {
       'totalPrice': totalPrice,
+      'status': 'pending',
       'uID': uID,
       'shippingAddressModel': shippingAddressModel.toJson(),
       'paymentMethod': paymentMethod,

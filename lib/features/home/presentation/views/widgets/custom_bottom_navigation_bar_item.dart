@@ -23,5 +23,3 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
           );
   }
 }
-
-

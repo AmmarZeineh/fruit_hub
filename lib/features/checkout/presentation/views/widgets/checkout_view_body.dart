@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:fruits_hub/core/helper_functions/error_snack_bar.dart';
+import 'package:fruits_hub/core/utils/app_keys.dart';
 import 'package:fruits_hub/core/widgets/build_app_bar.dart';
 import 'package:fruits_hub/core/widgets/custom_button.dart';
 import 'package:fruits_hub/features/checkout/domain/entities/order_entity.dart';
+import 'package:fruits_hub/features/checkout/domain/entities/payment_entity/payment_entity.dart';
 import 'package:fruits_hub/features/checkout/presentation/manger/add_order_cubit/add_order_cubit.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/check_out_steps_list.dart';
 import 'package:fruits_hub/features/checkout/presentation/views/widgets/checkout_page_view.dart';
@@ -80,6 +83,7 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
               } else if (currentIndex == 1) {
                 _handleAddressSection();
               } else {
+                _proccessPayment(context);
                 context
                     .read<AddOrderCubit>()
                     .addOrder(context.read<OrderInputEntity>());
@@ -92,6 +96,35 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         ],
       ),
     );
+  }
+
+  void _proccessPayment(BuildContext context) {
+    OrderInputEntity orderInputEntity = context.read<OrderInputEntity>();
+    PaymentEntity paymentEntity = PaymentEntity.fromEntity(orderInputEntity);
+
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (BuildContext context) => PaypalCheckoutView(
+        sandboxMode: true,
+        clientId: AppKeys.kClientId,
+        secretKey: AppKeys.kSecretKey,
+        transactions: [paymentEntity.toJson()],
+        note: "Contact us for any questions on your order.",
+        onSuccess: (Map params) async {
+          print("onSuccess: $params");
+          Navigator.pop(context);
+          errorSnackBar(context, 'تمت اضافة الطلب بنجاح');
+        },
+        onError: (error) {
+          print("onError: $error");
+          errorSnackBar(context, 'فشل في اضافة الطلب');
+          Navigator.pop(context);
+        },
+        onCancel: () {
+          print('cancelled:');
+          errorSnackBar(context, 'تم الغاء الطلب');
+        },
+      ),
+    ));
   }
 
   void _handleShippingSection(BuildContext context) {

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
@@ -62,6 +63,23 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
             height: 16,
           ),
           CheckoutStepsList(
+            onTap: (index) {
+              if (index == 0) {
+                pageController.animateToPage(index,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeIn);
+              } else if (index == 1) {
+                if (context.read<OrderInputEntity>().payWithCash != null) {
+                  pageController.animateToPage(index,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeIn);
+                } else {
+                  errorSnackBar(context, 'الرجاء اختيار طريقة الدفع');
+                }
+              } else {
+                _handleAddressSection();
+              }
+            },
             pageController: pageController,
             currentIndex: currentIndex,
           ),
@@ -110,17 +128,23 @@ class _CheckoutViewBodyState extends State<CheckoutViewBody> {
         transactions: [paymentEntity.toJson()],
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
-          print("onSuccess: $params");
+          if (kDebugMode) {
+            print("onSuccess: $params");
+          }
           Navigator.pop(context);
           errorSnackBar(context, 'تمت اضافة الطلب بنجاح');
         },
         onError: (error) {
-          print("onError: $error");
+          if (kDebugMode) {
+            print("onError: $error");
+          }
           errorSnackBar(context, 'فشل في اضافة الطلب');
           Navigator.pop(context);
         },
         onCancel: () {
-          print('cancelled:');
+          if (kDebugMode) {
+            print('cancelled:');
+          }
           errorSnackBar(context, 'تم الغاء الطلب');
         },
       ),
